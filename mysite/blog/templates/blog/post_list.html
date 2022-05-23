@@ -7,9 +7,25 @@
     <title>posts_list</title>
 </head>
 <body>
+    {%if user.is_authenticated%}
+    <h2>HELLO  {{user.username}}</h2>
+    {%endif%}
+    <br>
+
+
+    {%if user.is_authenticated%}
+    <form action="{%url 'logout_user'%}" method="post">
+        {% csrf_token %}
+
+        <button type="submit"><h3>Logout</h3></button>
+
+    </form>
+    {%endif%}
+    <br><br>
+    <hr>
     <ul>
         {% for post in posts %}
-        <li><a href="/detail_post/{{post.id}}">ID: {{post.id}}  -  TITLE: {{post.title}}  -  MODIFIED TIME: {{post.modified}}</a></li>
+        <li> ID: {{post.id}}  ---  TITLE: {{post.title}}   <a href="/detail_post/{{post.id}}">  <b>view</b> </a></li>
     
         {% endfor %}
 
@@ -17,12 +33,14 @@
         <br>
         <hr>
 
-        <h1><a href="/add_post/">ADD POST</a></h1>
+        <h1><a href="{% url 'add_post'%}">ADD POST</a></h1>
 
 
 
     </ul>
 
+    {%if user.is_authenticated%}
     
+    {%endif%}
 </body>
 </html>

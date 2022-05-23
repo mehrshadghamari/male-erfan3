@@ -1,6 +1,6 @@
-from dataclasses import field
-from xml.parsers.expat import model
-from django.forms import ModelForm
+
+from django import forms
+from django.forms import ModelForm,Form
 from .models import Post
 
 
@@ -8,6 +8,11 @@ class PostForm (ModelForm):
 
     class Meta:
         model=Post
-        field='__all__'
+        fields='__all__'
+
+
+class LoginForm(Form):
+    username=forms.CharField()
+    password=forms.CharField()
 
 
